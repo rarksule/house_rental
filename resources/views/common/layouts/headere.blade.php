@@ -1,17 +1,25 @@
-<div class="page-topbar">
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-        
-        <a class="navbar-brand" href="#">
-            <h2 class="m-0 text-primary">JIGJIGA House Rental</h2>
-        </a>
+<header id="page-topbar">
+    <div class="navbar-header navbar-expand-lg shadow-sm">
+        <div class="d-flex">
+            <div class="navbar-brand-box">
+                <a class="navbar-brand" href="#">
+                    <h2 class="m-0 text-primary font-24">JIGJIGA House Rental</h2>
+                </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            @if (isAdmin() || isOwner())
+                <button type="button" class="btn-sm px-3 font-24 header-item" id="vertical-menu-btn">
+                    <i class="ri-indent-decrease"></i>
+                </button>
+            @endif
 
-        <div class="collapse navbar-collapse" id="navbarContent">
-            @if (isTenant() || !Auth::check())
+
+        </div>
+        @if (isTenant() || !Auth::check())
+            <div class="navbar navbar-brand-box collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Home</a>
@@ -28,10 +36,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pages</a>
                     </li>
-            </ul>
-            @endif
+                </ul>
+            </div>
+        @endif
 
-        </div>
+
+
         @if (Auth::check())
             <div class="d-flex">
                 <div class="dropdown d-inline-block">
@@ -138,6 +148,4 @@
             </div>
         @endif
     </div>
-</nav>
-
-</div>
+</header>

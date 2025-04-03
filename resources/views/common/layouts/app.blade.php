@@ -51,173 +51,61 @@
         }
     </style>
 
-    @if (!Auth::check())
-        <style>
-            .container {
-                width: 90%;
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 20px 0;
+
+    <style>
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .hero-section {
+            background-color: #f5f5f5;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .property-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .property-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .property-type {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+
+        .property-rating {
+            color: #f39c12;
+            margin: 10px 0;
+        }
+
+            .property-card:hover {
+                transform: translateY(-5px);
             }
-
-            /* Hero Section */
-            .hero-section {
-                background-color: #f5f5f5;
-                padding: 60px 0;
-                text-align: center;
-            }
-
-            .hero-section h1 {
-                font-size: 2.5rem;
-                margin-bottom: 15px;
-            }
-
-            .search-form {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-wrap: wrap;
-                gap: 15px;
-                margin-top: 30px;
-            }
-
-            .form-group {
-                display: flex;
-                align-items: center;
-            }
-
-            .search-btn {
-                background-color: #2c3e50;
-                color: white;
-                border: none;
-                padding: 10px 25px;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            /* Property Cards */
-            .property-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 30px;
-                margin: 40px 0;
-            }
-
-            .property-card {
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                overflow: hidden;
-            }
-
-            .property-image {
-                height: 200px;
-                background-color: #eee;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .property-details {
-                padding: 20px;
-            }
-
-            .property-type {
-                display: inline-block;
-                background-color: #e74c3c;
-                color: white;
-                padding: 3px 10px;
-                border-radius: 3px;
-                font-size: 0.8rem;
-            }
-
-            .property-rating {
-                color: #f39c12;
-                margin: 10px 0;
-            }
-
-            .property-features {
-                display: flex;
-                list-style: none;
-                padding: 0;
-                gap: 15px;
-            }
-
-
-            /* Footer */
-            .main-footer {
-                background-color: #2c3e50;
-                color: white;
-                padding: 50px 0;
-            }
-
-            .footer-nav {
-                display: flex;
-                gap: 20px;
-                margin: 20px 0;
-            }
-
-            .footer-nav a {
-                color: white;
-                text-decoration: none;
-            }
-
-            .footer-actions {
-                display: flex;
-                gap: 15px;
-            }
-
-            .add-property,
-            .sign-in {
-                padding: 10px 20px;
-                border-radius: 5px;
-            }
-
-            .add-property {
-                background-color: #e74c3c;
-                color: white;
-            }
-
-            .sign-in {
-                background-color: white;
-                color: #2c3e50;
-            }
-
-
-            .hero-section {
-                background: linear-gradient(rgba(0, 0, 0, 0.6), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-                        background-size: cover;
-                        background-position: center;
-                        color: white;
-                        padding: 120px 0;
-                }
-
-                .property-card {
-                    transition: transform 0.3s;
-                    margin-bottom: 30px;
-                }
-
-                .property-card:hover {
-                    transform: translateY(-5px);
-                }
-
-                .property-img-placeholder {
-                    height: 200px;
-                    background-color: #f8f9fa;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #6c757d;
-                }
-
-                .rating {
-                    color: #FFD700;
-                }
-
-                .search-options .form-check-label {
-                    cursor: pointer;
-                }
-        </style>
-    @endif
+    </style>
     <link rel="stylesheet" href="{{ asset('assets/appvite.css') }}">
 </head>
 
@@ -231,11 +119,15 @@
 
     <div id="layout-wrapper">
         {{-- @if (isAdmin() || isOwner())
-            @include('common.layouts.header')
-            
+        @include('common.layouts.header')
+
         @endif --}}
-        @include('common.layouts.header')  
-        @include('common.layouts.sidebar')
+        @include('common.layouts.headere')  
+
+        @if(isAdmin() || isOwner())
+            @include('common.layouts.sidebar')
+        @endif
+
         {{ $slot }}
         {{-- @yield('content') --}}
     </div>

@@ -17,7 +17,7 @@ use App\Models\Notification;
 // use App\Models\Setting;
 // use App\Models\TaxSetting;
 // use App\Models\Tenant;
-// use App\Models\User;
+use App\Models\User;
 // use Illuminate\Support\Facades\App;
 // use Illuminate\Support\Facades\Log;
 // use Illuminate\Support\Facades\Storage;
@@ -533,7 +533,7 @@ function getNotificationLimit($user_id)
 }
 
 function selectedLanguage() {
-    $langugae = auth()->user();
+    $langugae = User::find(1);
     $langugae->name = 'English';
     
     $langugae->code = 'en';

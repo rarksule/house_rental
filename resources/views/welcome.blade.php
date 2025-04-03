@@ -1,8 +1,5 @@
 <x-app-layout>
     <div class="welcome">
-
-        
-
         <section class="hero-section">
             <div class="container text-center">
                 <h1 class="display-4 fw-bold mb-4">Find Your Perfect Home in JIGJIGA</h1>
@@ -44,10 +41,10 @@
         </section>
 
 
-        <section class="py-5 explore-section">
+        <section class="py-5">
             <div class="container">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bold">Explore Good Places</h2>
+                    <h1 class="fw-bold">Explore Good Places</h1>
                     <p class="text-muted">At vero eos et accusamus et lusto odio dignissimos ducimus qui
                         blanditis<br>proesentum voluptatum deleniti atque corrupti quos dolores</p>
                 </div>
