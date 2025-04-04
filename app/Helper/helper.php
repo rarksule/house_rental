@@ -533,7 +533,7 @@ function getNotificationLimit($user_id)
 }
 
 function selectedLanguage() {
-    $langugae = User::find(1);
+    $langugae = new User(['name'=>'English']);
     $langugae->name = 'English';
     
     $langugae->code = 'en';

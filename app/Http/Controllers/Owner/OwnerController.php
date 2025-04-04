@@ -22,11 +22,11 @@ class OwnerController extends Controller
         $auth = Auth::user();
         return view('owner.dashboard', [
             'user' => $auth,
-            'totalProperties'=>5,
-            'totalUnits'=>5,
-            'totalTenants'=>5,
+            'totalProperties'=>$auth->houses->count(),
+            'totalUnits'=>$auth->houses->whereNull('tenant_id')->count(),
+            'totalTenants'=>$auth->houses->whereNotNull('tenant_id')->count(),
             'yearlyTotalAmount'=>2000,
-            'properties'=>[],
+            'properties'=>$auth->houses,
 
         ]);
     }

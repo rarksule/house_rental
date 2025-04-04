@@ -18,6 +18,7 @@ use App\Http\Controllers\owner\OwnerController;
 
 
 Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'owner']], function () {
+    
     Route::group(['prefix' => 'property', 'as' => 'property.'], function () {
         Route::get('/add', [ProfileController::class, 'edit'])->name('add');
         Route::get('/allUnit', [ProfileController::class, 'edit'])->name('allUnit');

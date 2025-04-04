@@ -122,7 +122,7 @@
         @include('common.layouts.header')
 
         @endif --}}
-        @include('common.layouts.headere')  
+        @include('common.layouts.header')  
 
         @if(isAdmin() || isOwner())
             @include('common.layouts.sidebar')

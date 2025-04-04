@@ -35,9 +35,9 @@ class User extends Authenticatable implements HasMedia
     ];
 
     
-    public function house(): HasMany
+    public function houses(): HasMany
     {
-        return $this->hasMany(House::class, 'user_id', 'id');
+        return $this->hasMany(House::class, 'owner_id', 'id');
     }
 
 
@@ -72,11 +72,8 @@ class User extends Authenticatable implements HasMedia
         return asset('assets/images/no-image.jpg');
     }
 
-    public function registerMediaConversions(?Media $media = null): void
+    public function addImageAttribute(): void
     {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+        $this->addMediaFromRequest('image')->toMediaCollection('profile_image');
     }
 }

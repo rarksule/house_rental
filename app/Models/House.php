@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use App\Models\User;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class House extends Model implements HasMedia
 {
@@ -57,11 +55,6 @@ class House extends Model implements HasMedia
         'payment_date' => 'datetime',
     ];
 
-    // public function getNameAttribute(): string
-    // {
-    //     return $this->first_name . ' ' . $this->last_name;
-    // }
-
     public function getImageAttribute(): string
     {
         if ($this->getMedia() != null) {
@@ -70,11 +63,8 @@ class House extends Model implements HasMedia
         return asset('assets/images/no-image.jpg');
     }
 
-    public function registerMediaConversions(?Media $media = null): void
+    public function addImageAttribute(): void
     {
-        $this
-            ->addMediaConversion('preview')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+        $this->addMediaFromRequest('image')->toMediaCollection('images');
     }
 }

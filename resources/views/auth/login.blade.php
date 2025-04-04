@@ -7,13 +7,6 @@
                         <div class="sign-up-right-content bg-white">
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
-                                <div class="mb-25 sign-up-top-logo">
-                                    <a href="/">
-                                        <span class="logo-lg">
-                                            <img src="{{ getSettingImage('app_logo') }}">
-                                        </span>
-                                    </a>
-                                </div>
                                 <h1 class="mb-25">{{ __('Sign in') }}</h1>
                                 <p class="font-16 mb-30">{{ __('New owner?') }} <a href="{{ route('register') }}"
                                         class="secondary-color font-medium">{{ __('Sign Up') }}</a></p>
@@ -61,7 +54,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none d-md-block">
                         <div class="sign-up-left-content position-relative text-center">
                             <div class="sign-up-bottom-img mb-25">
                                 <img src="{{ getSettingImage('sign_in_image') }}" alt="{{ 'app_name' }}"

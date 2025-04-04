@@ -8,13 +8,6 @@
                         <div class="sign-up-right-content bg-white">
                             <form action="register" method="post">
                                 @csrf
-                                <div class="mb-25 sign-up-top-logo">
-                                    <a href="{{ route('home') }}">
-                                        <span class="logo-lg">
-                                            <img src="{{ getSettingImage('app_logo') }}">
-                                        </span>
-                                    </a>
-                                </div>
                                 <h1 class="mb-25">{{ __('Sign Up') }}</h1>
                                 <p class="font-16 mb-30">{{ __('Already have an account?') }} <a href="{{ route('login') }}"
                                         class="secondary-color font-medium">{{ __('Sign In') }}</a></p>
@@ -50,7 +43,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label
-                                            class="label-text-title color-heading font-medium mb-2">{{ __('Contact Number') }}</label>
+                                            class="label-text-title color-heading font-medium mb-2">{{ __('Register As') }}</label>
                                     <select id="role" name="role" class="form-control"> 
                                             <option value={{USER_ROLE_TENANT}}>{{"Tenant"}}</option>
                                             <option value={{USER_ROLE_OWNER}}>{{"Owner"}}</option>
@@ -115,7 +108,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-none d-md-block">
                         <div class="sign-up-left-content position-relative text-center">
                             <div class="sign-up-bottom-img mb-25">
                                 <img src="{{ getSettingImage('sign_in_image') }}" alt="app_name"
