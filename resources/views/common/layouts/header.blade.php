@@ -17,7 +17,7 @@
                 </div>
 
 
-                
+
 
                 <!-- Right Side: User Controls -->
                 <div class="d-flex align-items-center ms-auto">
@@ -140,33 +140,36 @@
             </div>
             <!-- Navigation Links (Will collapse on mobile) -->
             @if (isTenant() || !Auth::check())
-                    <div class="navbar navbar-expand-lg navbar-light bg-light">
-                        <div class="container-fluid">
-                            <div class="collapse navbar-collapse" id="navbarContent">
-                                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <div class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarContent">
+                            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Listings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Projects</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Features</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Pages</a>
+                                </li>
+                                @if (!Auth::check())
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#">Home</a>
+                                        <a href="{{route('login')}}" class=" btn btn-danger  text-nowrap">Sign In</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Listings</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Projects</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Features</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Pages</a>
-                                    </li>
-                                    @if (!Auth::check())
-                                        <a href="{{route('login')}}" class="btn btn-danger px-4 ms-2">Sign In</a>
-                                    @endif
-                                </ul>
-                            </div>
+                                @endif
+
+                            </ul>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
         </div>
     </div>
 

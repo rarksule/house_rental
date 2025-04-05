@@ -14,7 +14,8 @@
 @endif
 <!-- Bootstrap core JavaScript -->
 <script src="{{ asset('assets/libs/jquery/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
 
 <!-- JQuery UI -->
 <script src="{{ asset('assets/libs/jquery-easing/jquery.easing.min.js') }}"></script>

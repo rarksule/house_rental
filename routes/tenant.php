@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\owner\OwnerController;
+use App\Http\Controllers\tenant\TenantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,5 +40,7 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.create');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.contact');
     Route::delete('/information', [ProfileController::class, 'destroy'])->name('information.index');
+    
+    Route::get('/house_detail', [TenantController::class, 'index'])->name('house_detail');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
 });

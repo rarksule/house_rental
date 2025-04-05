@@ -50,86 +50,39 @@
                 </div>
 
                 <div class="row">
-                    <!-- Property 1 -->
-                    <div class="col-md-4">
-                        <div class="card property-card h-100">
-                            <div class="property-image">
-                                <span>600 × 600</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="property-type bg-danger mb-2">Rent</span>
-                                <h3>4,760 Birr / Month</h3>
-                                <p class="text-muted">1025 West 19th Street</p>
-                                <div class="mb-3 property-rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ms-1">(9 Reviews)</span>
-                                </div>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fas fa-bed me-1"></i> 4 Beds</li>
-                                    <li class="list-inline-item"><i class="fas fa-bath me-1"></i> 2 Bath</li>
-                                    <li class="list-inline-item"><i class="fas fa-arrows"></i> 447 m²</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @for ($i = 0; $i < 3; $i++)
+                        <div class="col-md-4">
+                            <div class="card property-card h-100">
+                                <a href="{{route('tenant.house_detail')}}"
+                                    class="text-decoration-none text-reset stretched-link">
 
-                    <!-- Property 2 -->
-                    <div class="col-md-4">
-                        <div class="card property-card h-100">
-                            <div class="property-image">
-                                <span>600 × 600</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="property-type bg-success mb-2">Rent</span>
-                                <h3>25,333 Birr / Month</h3>
-                                <p class="text-muted">6007 Applegate Lane</p>
-                                <div class="property-rating mb-3">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ms-1">(7 Reviews)</span>
-                                </div>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fas fa-bed me-1"></i> 1 Beds</li>
-                                    <li class="list-inline-item"><i class="fas fa-bath me-1"></i> 4 Bath</li>
-                                    <li class="list-inline-item"><i class="fas fa-arrows"></i> 298 m²</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="property-image">
+                                        <span>600 × 600</span>
+                                    </div>
+                                    <div class="card-body">
 
-                    <!-- Property 3 -->
-                    <div class="col-md-4">
-                        <div class="card property-card h-100">
-                            <div class="property-image">
-                                <span>600 × 600</span>
-                            </div>
-                            <div class="card-body">
-                                <span class="property-type bg-danger mb-2">Rent</span>
-                                <h3>8,467 Birr / Month</h3>
-                                <p class="text-muted">2721 Lindsay Avenue</p>
-                                <div class="property-rating mb-3">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span class="ms-1">(10 Reviews)</span>
-                                </div>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item"><i class="fas fa-bed me-1"></i> 3 Beds</li>
-                                    <li class="list-inline-item"><i class="fas fa-bath me-1"></i> 2 Bath</li>
-                                    <li class="list-inline-item"><i class="fas fa-ruler-combined me-1"></i> 283 m²</li>
-                                </ul>
+                                        <span class="property-type bg-danger mb-2 d-inline-block">Rent</span>
+                                        <h3>4,760 Birr / Month</h3>
+                                        <p class="text-muted">1025 West 19th Street</p>
+                                        <div class="mb-3 property-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="ms-1">(9 Reviews)</span>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fas fa-bed me-1"></i> 4 Beds</li>
+                                            <li class="list-inline-item"><i class="fas fa-bath me-1"></i> 2 Bath</li>
+                                            <li class="list-inline-item"><i class="fas fa-arrows"></i> 447 m²</li>
+                                        </ul>
+                                    </div>
+
+                                </a>
                             </div>
                         </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </section>

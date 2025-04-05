@@ -8,7 +8,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('assets/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <link href="{{ asset('/') }}assets/libs/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}assets/css/animate.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,10 @@
     <link rel="shortcut icon" href="{{ getSettingImage('app_fav_icon') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ getSettingImage('app_fav_icon') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
-    @stack('style')
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
     <style>
         :root {
             @if ('website_color_mode' == ACTIVE)
@@ -63,6 +66,7 @@
         .hero-section {
             background-color: #f5f5f5;
             padding: 60px 0;
+            margin-top: 2rem;
             text-align: center;
         }
 
@@ -89,7 +93,6 @@
 
 
         .property-type {
-            display: inline-block;
             background-color: #e74c3c;
             color: white;
             padding: 3px 10px;
@@ -102,9 +105,27 @@
             margin: 10px 0;
         }
 
-            .property-card:hover {
-                transform: translateY(-5px);
-            }
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-header {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .review-card {
+            margin-bottom: 1.5rem;
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 0.25rem;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('assets/appvite.css') }}">
 </head>
@@ -131,6 +152,10 @@
         {{ $slot }}
         {{-- @yield('content') --}}
     </div>
+    @if (isTenant() || !Auth::check())
+
+    @endif
+    @include('common.layouts.footer')
     @include('common.layouts.script')
     @stack('script')
 
