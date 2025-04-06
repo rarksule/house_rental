@@ -116,10 +116,19 @@
 
                     <div class="card review-card">
                         <div class="card-body">
-                            <div class="d-flex justifycontent-between mb-2">
+                            <div class="d-flex justify-content-between mb-2">
                                 <h5 class="card-title">Ida Hadikiewicz</h5>
+                                
                                 <small class="text-muted">11 MONTHS AGO</small>
                             </div>
+                            <div class="mb-3 property-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <span class="ms-1">(9/10)</span>
+                                        </div>
                             <p class="card-text">Unde ducimus ut perferendis ut ea qui consequatur. Nam sint a magnam.
                                 Eos illum amet aliquid iste.</p>
                         </div>

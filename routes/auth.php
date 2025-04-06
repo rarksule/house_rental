@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\UserController;
+
+use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +57,11 @@ Route::middleware('auth')->group(function () {
 //     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+
+    Route::post('delete-my-account', [LoginController::class, 'destroy'])
+                ->name('delete-my-account');
+    
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('logout', [LoginController::class, 'destroy'])
                 ->name('logout');

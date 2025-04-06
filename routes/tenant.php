@@ -35,7 +35,7 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
     })->name('dashboard');
 
     Route::get('/notification', [ProfileController::class, 'edit'])->name('notification');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.index');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.create');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.contact');

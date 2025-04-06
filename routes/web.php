@@ -18,20 +18,21 @@ Route::get('/local/{ln}', function ($ln) {
     return redirect()->back();
 })->name('local');
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     if (Auth::check()) {
         switch (Auth::user()->role) {
             case USER_ROLE_ADMIN:
                 return redirect(route('admin.dashboard'));
             case USER_ROLE_OWNER:
                 return redirect(route('owner.dashboard'));
-            case USER_ROLE_TENANT:
-                return redirect(route('tenant.dashboard'));
         }
-
     } else {
-        return view('welcome');
+        return redirect(route('home'));
     }
+})->name('dashboard');
+
+Route::get('/', function () {
+    return view('welcome');
 })->name('home');
 
 Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');

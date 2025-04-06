@@ -60,7 +60,7 @@ Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'o
     Route::get('/setting', [OwnerController::class, 'index'])->name('setting');
     Route::get('/dashboard', [OwnerController::class, 'index'])->name('dashboard');
     Route::get('/notification', [ProfileController::class, 'edit'])->name('notification');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name(name: 'profile');
     Route::get('/information', [ProfileController::class, 'destroy'])->name('information.index');
     Route::get('/search', [ProfileController::class, 'destroy'])->name('top.search');
 });

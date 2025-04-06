@@ -1,6 +1,6 @@
-@extends(getLayout() . '.layouts.app')
 
-@section('content')
+
+<x-app-layout>
     <!-- Right Content Start -->
     <div class="main-content">
         <div class="page-content">
@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="{{ route(getLayout() . '.dashboard') }}"
+                                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"
                                                 title="{{ __('Dashboard') }}">{{ __('Dashboard') }}</a></li>
                                         <li class="breadcrumb-item">{{ __('Profile') }}</li>
                                         <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
@@ -51,13 +51,10 @@
                                                                     class="upload-profile-photo-box upload-profile-photo-with-delete-btn mb-25">
                                                                     <div
                                                                         class="profile-user position-relative d-inline-block">
-                                                                        @if(auth()->user()->role == USER_ROLE_OWNER)
-                                                                        <img src="@if (auth()->user()->image) {{ auth()->user()->image }} @else {{ asset('assets/images/users/empty-user.jpg') }} @endif"
+                                                                        
+                                                                        <img src="{{ (auth()->user()->image) ? auth()->user()->image  :  asset('assets/images/users/empty-user.jpg') }}"
                                                                             class="rounded-circle avatar-xl default-user-profile-image">
-                                                                        @elseif(auth()->user()->role == USER_ROLE_TENANT)
-                                                                            <img src="@if ($tenant->image) {{ $tenant->image }} @else {{ asset('assets/images/users/empty-user.jpg') }} @endif"
-                                                                                 class="rounded-circle avatar-xl default-user-profile-image">
-                                                                        @endif
+                                                                        
                                                                         <div
                                                                             class="avatar-xs p-0 rounded-circle default-profile-photo-edit">
                                                                             <input id="default-profile-img-file-input"
@@ -74,7 +71,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <!-- Upload Profile Photo Box End -->
-                                                                @if (auth()->user()->role == USER_ROLE_TENANT || auth()->user()->role == USER_ROLE_MAINTAINER)
+                                                                @if (auth()->user()->role == USER_ROLE_TENANT || auth()->user()->role == USER_ROLE_OWNER)
                                                                     <div>
                                                                         <button type="button" class="theme-btn-red"
                                                                             id="deleteMyAccountBtn"
@@ -149,7 +146,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if (auth()->user()->role == USER_ROLE_OWNER)
+                                                @if (isOwner())
                                                     <div class="settings-inner-box bg-white theme-border radius-4 mb-25">
                                                         <div class="settings-inner-box-fields pb-0">
                                                             <div class="settings-inner-box-title border-bottom p-20">
@@ -198,7 +195,7 @@
                                                                         <div
                                                                             class="profile-user position-relative d-inline-block">
                                                                             @if ($owner->file_name)
-                                                                                <img src="{{ assetUrl($owner->folder_name . '/' . $owner->file_name) }}"
+                                                                                <img src="{{ asset($owner->folder_name . '/' . $owner->file_name) }}"
                                                                                     class="rounded-circle avatar-xl user-profile-image">
                                                                             @else
                                                                                 <img src="{{ asset('assets/images/users/empty-user.jpg') }}"
@@ -225,7 +222,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if (auth()->user()->role == USER_ROLE_TENANT)
+                                                @if (isTenant())
                                                     <div class="settings-inner-box bg-white theme-border radius-4 mb-25">
                                                         <div class="settings-inner-box-fields pb-0">
                                                             <div class="settings-inner-box-title border-bottom p-20">
@@ -469,10 +466,11 @@
             </div>
         </div>
     </div>
-@endsection
-
-@push('script')
+    @push('script')
     <script src="{{ asset('/') }}assets/js/pages/profile-setting.init.js"></script>
     <script src="{{ asset('/') }}assets/js/pages/default-profile-setting.init.js"></script>
     <script src="{{ asset('assets/js/custom/delete-my-account.js') }}"></script>
 @endpush
+</x-app-layout>
+
+

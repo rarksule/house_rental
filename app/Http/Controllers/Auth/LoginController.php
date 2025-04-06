@@ -70,7 +70,7 @@ class LoginController extends Controller
             Auth::logout();
             return redirect("login")->with('error', __('Your account has been deleted.'));
         } elseif (isset($user) && ($user->status == USER_STATUS_ACTIVE)) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } else {
             Auth::logout();
             return redirect("login")->with('error', __(SOMETHING_WENT_WRONG));

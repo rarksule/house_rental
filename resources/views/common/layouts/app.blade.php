@@ -152,10 +152,11 @@
         {{ $slot }}
         {{-- @yield('content') --}}
     </div>
-    @if (isTenant() || !Auth::check())
-
-    @endif
+    @if (!isAdminPanel())
     @include('common.layouts.footer')
+    @endif
+
+    
     @include('common.layouts.script')
     @stack('script')
 

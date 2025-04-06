@@ -1,3 +1,4 @@
+ @if (isAdminPanel())
 <div class="vertical-menu">
     <div data-simplebar class="h-100">
         <!--- Sidemenu -->
@@ -6,7 +7,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
 
                 <li>
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                         <i class="ri-dashboard-line"></i>
                         <span>{{ __('Dashboard') }}</span>
                     </a>
@@ -80,7 +81,7 @@
                     </a>
                     <ul class="sub-menu {{ @$navProfileMMShowClass }}" aria-expanded="false">
                         <li class="{{ @$subNavProfileMMActiveClass }}"><a class="{{ @$subNavProfileActiveClass }}"
-                                href="{{ route('profile') }}">{{ __('My Profile') }}</a></li>
+                                href="{{ route(userPrefix().'.profile') }}">{{ __('My Profile') }}</a></li>
                         <li><a href="{{ route('change-password') }}">{{ __('Change Password') }}</a></li>
                     </ul>
                 </li>
@@ -121,3 +122,4 @@
         </div>
     </div>
 </div>
+@endif

@@ -532,10 +532,11 @@ function getNotificationLimit($user_id)
     return $fetchNotification;
 }
 
-function selectedLanguage() {
-    $langugae = new User(['name'=>'English']);
+function selectedLanguage()
+{
+    $langugae = new User(['name' => 'English']);
     $langugae->name = 'English';
-    
+
     $langugae->code = 'en';
     $langugae->status = 1;
     $langugae->icon = 'assets/images/language-flag/EN.png';
@@ -544,8 +545,27 @@ function selectedLanguage() {
 
 }
 
-function languages(){
-    return [selectedLanguage(),selectedLanguage()];
+function userPrefix()
+{
+    if (isAdmin()) {
+        return 'admin';
+    } else {
+        return isOwner() ? 'owner' : 'tenant';
+    }
+}
+
+function languages()
+{
+    return [selectedLanguage(), selectedLanguage()];
+}
+
+function isAdminPanel()
+{
+    if (isAdmin() || isOwner()) {
+        return Route::currentRouteName() != 'home';
+    } else {
+        return false;
+    }
 }
 
 // if (!function_exists('taxSetting')) {

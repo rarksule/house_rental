@@ -8,23 +8,24 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
                         <div class="bg-white rounded p-4 d-flex flex-wrap justify-content-center search-options">
-                            <div class="form-check form-check-inline mx-3 my-2">
+                            <div class="form-check form-check-inline my-2">
                                 <div class="filter-item">
-                                    <select class="form-select" id="neighborhood">
-                                        <option selected>Select Neighborhood</option>
-                                        <option>Downtown</option>
-                                        <option>Suburb</option>
-                                    </select>
+                                    <input type="text" class="form-control rounded" id="neighborhood"
+                                        placeholder="Search Neighborhoods..." list="neighborhoodOptions">
+                                    <datalist id="neighborhoodOptions">
+                                        <option value="Downtown">
+                                        <option value="Suburb">
+                                    </datalist>
                                 </div>
                             </div>
-                            <div class="form-check form-check-inline mx-3 my-2">
+                            <div class="form-check form-check-inline my-2">
                                 <select class="form-select" id="category">
                                     <option selected>Select Category</option>
                                     <option>Restaurants</option>
                                     <option>Shops</option>
                                 </select>
                             </div>
-                            <div class="form-check form-check-inline mx-3 my-2">
+                            <div class="form-check form-check-inline my-2">
                                 <select class="form-select" id="city">
                                     <option selected>Select City</option>
                                     <option>New York</option>
