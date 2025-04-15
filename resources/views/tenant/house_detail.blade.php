@@ -155,6 +155,7 @@
                             <textarea class="form-control" id="message" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        <a href="{{'message'}}">send message</a>
                     </form>
                 </div>
 

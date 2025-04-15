@@ -142,10 +142,10 @@
         {{-- @if (isAdmin() || isOwner())
         @include('common.layouts.header')
 
-        @endif --}}
-        @include('common.layouts.header')  
+        @endif  --}}
+        @include('common.layouts.header')
 
-        @if(isAdmin() || isOwner())
+        @if(!isTenant())
             @include('common.layouts.sidebar')
         @endif
 

@@ -5,37 +5,48 @@
                 <h1 class="display-4 fw-bold mb-4">Find Your Perfect Home in JIGJIGA</h1>
                 <p class="lead mb-5">From as low as 1999 birr per month with limited time offer</p>
 
+
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="bg-white rounded p-4 d-flex flex-wrap justify-content-center search-options">
-                            <div class="form-check form-check-inline my-2">
-                                <div class="filter-item">
-                                    <input type="text" class="form-control rounded" id="neighborhood"
-                                        placeholder="Search Neighborhoods..." list="neighborhoodOptions">
-                                    <datalist id="neighborhoodOptions">
-                                        <option value="Downtown">
-                                        <option value="Suburb">
-                                    </datalist>
+                        <h1 class="text-center mb-5">Find Accessible Homes To Rent</h1>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title mb-4">Search for a location</h3>
+
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search Neighborhoods..." list="neighborhoodOptions">
+                                        <button class="btn btn-primary" type="button">Search</button>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Min Price</label>
+                                        <select class="form-select">
+                                            <option selected>No Min</option>
+                                            <option>$500</option>
+                                            <option>$1,000</option>
+                                            <option>$1,500</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Max Price</label>
+                                        <select class="form-select">
+                                            <option selected>No Max</option>
+                                            <option>$1,000</option>
+                                            <option>$2,000</option>
+                                            <option>$3,000</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-check form-check-inline my-2">
-                                <select class="form-select" id="category">
-                                    <option selected>Select Category</option>
-                                    <option>Restaurants</option>
-                                    <option>Shops</option>
-                                </select>
-                            </div>
-                            <div class="form-check form-check-inline my-2">
-                                <select class="form-select" id="city">
-                                    <option selected>Select City</option>
-                                    <option>New York</option>
-                                    <option>Los Angeles</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary px-4 my-2">Search</button>
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
 
@@ -54,8 +65,7 @@
                     @for ($i = 0; $i < 3; $i++)
                         <div class="col-md-4">
                             <div class="card property-card h-100">
-                                <a href="{{route('tenant.house_detail')}}"
-                                    class="text-decoration-none text-reset stretched-link">
+                                <a href="{{route('house_detail')}}" class="text-decoration-none text-reset stretched-link">
 
                                     <div class="property-image">
                                         <span>600 × 600</span>

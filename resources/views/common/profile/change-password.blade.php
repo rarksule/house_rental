@@ -1,6 +1,6 @@
-@extends(getLayout() . '.layouts.app')
 
-@section('content')
+
+<x-app-layout>
     <!-- Right Content Start -->
     <div class="main-content">
 
@@ -33,7 +33,7 @@
                     <div class="row">
                         <!-- Profile Page Content Area Start -->
                         <div class="profile-page-content-area">
-                            <form action="{{ route('change-password.update') }}" method="post">
+                            <form action="{{ route('confirm-password') }}" method="post">
                                 @csrf
                                 <div class="settings-inner-box bg-white theme-border radius-4 mb-25">
                                     <div class="settings-inner-box-fields p-20 pb-0">
@@ -81,4 +81,4 @@
         <!-- End Page-content -->
     </div>
     <!-- Right Content End -->
-@endsection
+</x-app-layout>

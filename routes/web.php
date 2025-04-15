@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\tenant\TenantController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/local/{ln}', function ($ln) {
     // $language = Language::where('code', $ln)->first();
@@ -17,6 +18,8 @@ Route::get('/local/{ln}', function ($ln) {
     // App::setLocale(session()->get('local'));
     return redirect()->back();
 })->name('local');
+
+Route::get('/message',[MessageController::class,'index'])->name('message');
 
 Route::get('/dashboard', function () {
     if (Auth::check()) {
@@ -35,9 +38,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
-
-Route::patch('/change', [ProfileController::class, 'update'])->name('change-password');
-
+Route::get('/house_detail', [TenantController::class, 'index'])->name('house_detail');
 
 require __DIR__ . '/auth.php';

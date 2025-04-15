@@ -51,10 +51,15 @@ Route::middleware('auth')->group(function () {
 //                 ->middleware('throttle:6,1')
 //                 ->name('verification.send');
 
-//     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-//                 ->name('password.confirm');
 
-//     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+
+    Route::patch('/change', [ProfileController::class, 'update'])->name('change-password');
+
+    Route::get('change-password', [PasswordController::class, 'index'])
+                ->name('change-password');
+
+    Route::post('confirm-password', [PasswordController::class, 'store'])->name('confirm-password');
 
     // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 

@@ -31,7 +31,7 @@
                     <p class="mb-0">©2024 Resido. All rights reserved by TheSky®.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button class="btn btn-outline-light">Sign Up Today</button>
+                    <button class="btn btn-outline-light"><a href="{{route('register')}}"> Sign Up Today</a></button>
                 </div>
             </div>
         </div>
