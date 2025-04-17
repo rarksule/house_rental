@@ -167,7 +167,7 @@
                                 </li>
                                 @if (!Auth::check())
                                     <li class="nav-item">
-                                        <a href="{{route('login')}}" class=" btn btn-success text-nowrap">Sign In</a>
+                                        <a href="{{route('login')}}" ><button class="btn btn-success text-nowrap">Sign In</button></a>
                                     </li>
                                 @endif
 
