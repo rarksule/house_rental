@@ -39,10 +39,10 @@
                             <div class="card mb-4 border-0 shadow-sm">
                                 <div class="card-body">
                                     <h5 class="fw-bold mb-3">Property Images</h5>
-                                    <div id="dropzone"
-                                        class="border-dashed p-5 text-center bg-light bg-opacity-50 rounded-3">
+                                    <div id="my-dropzone"
+                                        class="border-dashed p-5 text-center bg-light bg-opacity-50 rounded-3 ">
                                         <i class="bi bi-cloud-arrow-up fs-1 text-muted"></i>
-                                        <p class="mt-2 mb-0 text-muted">Drop files here or click to upload.</p>
+                                        <p class="mt-2 mb-0 text-muted dropzone">Drop files here or click to upload.</p>
                                         <input type="file" id="fileInput" multiple style="display: none;">
                                         <div id="previewContainer" class="mt-3 d-flex flex-wrap gap-2"></div>
                                     </div>
@@ -51,31 +51,6 @@
                             <!-- Location Section -->
                             <div class="card mb-4 border-0 shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="fw-bold mb-3">Country</h5>
-                                    <div class="row g-3">
-                                        <div class="col-md-4">
-                                            <select class="form-select form-select-lg">
-                                                <option selected>United States of America</option>
-                                                <option>Canada</option>
-                                                <option>United Kingdom</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select class="form-select form-select-lg">
-                                                <option selected>Select state...</option>
-                                                <option>California</option>
-                                                <option>New York</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <select class="form-select form-select-lg">
-                                                <option selected>Select city...</option>
-                                                <option>Los Angeles</option>
-                                                <option>San Francisco</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
                                     <h5 class="fw-bold mt-4 mb-3">Property location</h5>
                                     <input type="text" class="form-control form-control-lg mb-3"
                                         placeholder="Property location">
@@ -85,13 +60,13 @@
                                             <label for="latitude" class="form-label fw-bold">Latitude</label>
                                             <input type="text" class="form-control" id="latitude"
                                                 placeholder="Ex: 1.462260">
-                                            <small class="text-muted">Go here to get Latitude from address.</small>
+                                            <a href="https://www.latlong.net/convert-address-to-lat-long.html" ><small class="text-muted">Go here to get Latitude from address</small></a>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="longitude" class="form-label fw-bold">Longitude</label>
                                             <input type="text" class="form-control" id="longitude"
                                                 placeholder="Ex: 103.812530">
-                                            <small class="text-muted">Go here to get Longitude from address.</small>
+                                                <a href="https://www.latlong.net/convert-address-to-lat-long.html" ><small class="text-muted">Go here to get Latitude from address</small></a>
                                         </div>
                                     </div>
 
@@ -232,9 +207,5 @@
             a_configuration_option: 400
         });
     </script>
-       <script src="{{asset("assets/libs/dropzone/dropzone.js")}}"></script>
-
-<script>
-  const dropzone = new Dropzone("div#dropzone", { url: "/file/post" });
-</script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 </x-app-layout>

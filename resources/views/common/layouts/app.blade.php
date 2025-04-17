@@ -16,7 +16,7 @@
     <link rel="icon" href="{{ getSettingImage('app_fav_icon') }}.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
 
-    <link rel="stylesheet" href="{{asset("assets/libs/dropzone/dropzone.css")}}"/>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <style>
         :root {
             @if ('website_color_mode' == ACTIVE)
@@ -31,80 +31,6 @@
             @endif
         }
     </style>
-
-
-    <style>
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-
-        .hero-section {
-            background-color: #f5f5f5;
-            padding: 60px 0;
-            margin-top: 2rem;
-            text-align: center;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .property-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            margin-bottom: 30px;
-        }
-
-        .property-image {
-            height: 200px;
-            background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-
-        .property-type {
-            background-color: #e74c3c;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 3px;
-            font-size: 0.8rem;
-        }
-
-        .property-rating {
-            color: #f39c12;
-            margin: 10px 0;
-        }
-
-        .property-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .property-header {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
-
-        .review-card {
-            margin-bottom: 1.5rem;
-            border: none;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-
-        .contact-form {
-            background-color: #f8f9fa;
-            padding: 2rem;
-            border-radius: 0.25rem;
-        }
-    </style>
     <link rel="stylesheet" href="{{ asset('assets/appvite.css') }}">
 </head>
 
@@ -117,10 +43,6 @@
     @endif
 
     <div id="layout-wrapper">
-        {{-- @if (isAdmin() || isOwner())
-        @include('common.layouts.header')
-
-        @endif --}}
         @include('common.layouts.header')
 
         @if(!isTenant())
