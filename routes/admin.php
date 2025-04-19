@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
     Route::delete('/information', [ProfileController::class, 'destroy'])->name('information.index');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('setting');
+    Route::get('/message',[MessageController::class,'index'])->name('message');
 });

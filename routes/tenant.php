@@ -43,5 +43,6 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.contact');
     Route::delete('/information', [ProfileController::class, 'destroy'])->name('information.index');
     
+    Route::get('/message',[MessageController::class,'index'])->name('message');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
 });

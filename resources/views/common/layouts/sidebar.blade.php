@@ -20,20 +20,16 @@
                         </a>
                         <ul class="sub-menu {{ @$navPropertyMMShowClass }}" aria-expanded="false">
                             <li class="{{ @$subNavAllPropertyMMActiveClass }}">
-                                <a href="{{ route('owner.property.allProperty') }}"
-                                    class="{{ @$subNavAllPropertyActiveClass }}">{{ __('All Property') }}</a>
+                                <a href="{{ route('owner.allHouse') }}"
+                                    class="{{ @$subNavAllPropertyActiveClass }}">{{ __('All Houses') }}</a>
                             </li>
                             <li class="{{ @$subNavAllUnitMMActiveClass }}">
-                                <a href="{{ route('owner.property.allUnit') }}"
-                                    class="{{ @$subNavAllUnitActiveClass }}">{{ __('All Unit') }}</a>
+                                <a href="{{ route('owner.addHouse') }}"
+                                    class="{{ @$subNavAllUnitActiveClass }}">{{ __('Add House') }}</a>
                             </li>
                             <li class="{{ @$subNavOwnPropertyActiveClass }}">
-                                <a href="{{ route('owner.property.ownProperty') }}"
-                                    class="{{ @$subNavOwnPropertyActiveClass }}">{{ __('Own Property') }}</a>
-                            </li>
-                            <li class="{{ @$subNavLeasePropertyActiveClass }}">
-                                <a href="{{ route('owner.property.leaseProperty') }}"
-                                    class="{{ @$subNavLeasePropertyActiveClass }}">{{ __('Lease Property') }}</a>
+                                <a href="{{ route('owner.rentedHouse') }}"
+                                    class="{{ @$subNavOwnPropertyActiveClass }}">{{ __('Rented Houses') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -87,7 +83,7 @@
                 </li>
 
                 <li>
-                    <a href=" route('admin.dashboard')">
+                    <a href=" {{route(userPrefix().'.message')}}">
                         <i class="ri-message-fill"></i>
                         <span>{{ __('Message') }}</span>
                     </a>

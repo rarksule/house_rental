@@ -16,7 +16,9 @@
     <link rel="icon" href="{{ getSettingImage('app_fav_icon') }}.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
 
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    
+
+    <link href="{{ asset('/') }}assets/css/extra-style.css" rel="stylesheet" type="text/css" />
     <style>
         :root {
             @if ('website_color_mode' == ACTIVE)
@@ -30,7 +32,15 @@
                 --button-hover-color: #0063E6;
             @endif
         }
+        .dropzone {
+            border: 2px dashed #0087F7;
+            border-radius: 5px;
+            background: white;
+            min-height: 150px;
+            padding: 20px;
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.css">
     <link rel="stylesheet" href="{{ asset('assets/appvite.css') }}">
 </head>
 
@@ -59,7 +69,7 @@
 
     @include('common.layouts.script')
     @stack('script')
-
+    
     <!-- App Custom js -->
     <!-- <script src="{{ asset('assets/appvite.js') }}"></script> -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>

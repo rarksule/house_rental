@@ -25,21 +25,6 @@
             </div>
             <!-- Information Page Area row Start -->
             <div class="row">
-                <!-- Property Top Search Bar Start -->
-                <h4 class="mb-20">{{ __('All Maintanance') }}</h4>
-                <div class="property-top-search-bar">
-                    <div class="property-search-inner-bg bg-off-white theme-border radius-4 p-25 pb-0 mb-25">
-                        <div class="row align-items-center">
-                            <div class="col-md-12">
-                                <div class="property-top-search-bar-right text-end">
-                                    <button type="button" class="theme-btn mb-25" id="add"
-                                        title="{{ __('Add Maintenance Request') }}">{{ __('Add Maintenance Request') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Property Top Search Bar End -->
 
                 <!-- All Maintainer Table Area Start -->
                 <div class="all-maintainer-table-area">

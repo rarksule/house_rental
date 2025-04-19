@@ -260,26 +260,5 @@ $('.dropify').dropify({
         'error': 'Oops, something wrong happened.'
     }
 });
-// dropzone initial
-var dropzonePreviewNode = document.querySelector("#dropzone-preview-list2");
-if (dropzonePreviewNode) {
-    dropzonePreviewNode.id = "";
-    var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
-    dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
-    var dropzone = new Dropzone(".dropzone", {
-        url: $('#tenantStoreRoute').val(),
-        method: "post",
-        previewTemplate: previewTemplate,
-        previewsContainer: "#dropzone-preview2",
-    });
-    var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
-    dropzone.on("sending", function (file, xhr, formData) {
-        formData.append("_token", CSRF_TOKEN);
-        formData.append("id", $("input[name='id']").val());
-        formData.append("step", 3);
-    });
-    dropzone.on("complete", function (file) {
-        toastr.success('File Uploaded Successfully');
-    });
-}
+
 
