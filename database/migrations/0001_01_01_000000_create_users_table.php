@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('password');
             $table->string('contact_number', 20)->nullable()->unique();
             $table->boolean('status')->default(0)->comment('Active = true, Inactive = false');
-            $table->bigInteger('created_by')->nullable();
             $table->enum('role', [USER_ROLE_OWNER,USER_ROLE_TENANT,USER_ROLE_ADMIN]);
             $table->softDeletes();
             $table->timestamps();

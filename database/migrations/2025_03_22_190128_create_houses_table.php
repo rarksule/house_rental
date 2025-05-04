@@ -17,12 +17,15 @@ return new class extends Migration
             $table->unsignedBigInteger('tenant_id')->nullable();
             $table->foreign('tenant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('owner_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->decimal('amount')->default(0)->nullable();
+            $table->decimal('price')->default(0)->nullable();
             $table->date('payment_date')->nullable();
             $table->text('address')->nullable();
             $table->mediumText('map_link')->nullable();
             $table->longText('description');
-            $table->double('review')->default('0');
+            $table->mediumText('privateNotes')->nullable();
+            $table->decimal('area')->default(0)->nullable();
+            $table->double('review')->default('0.0');
+            $table->boolean('rented')->default(false);
             $table->json('amenities')->nullable();
             $table->softDeletes();
             $table->timestamps();

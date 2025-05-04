@@ -45,4 +45,7 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
     
     Route::get('/message',[MessageController::class,'index'])->name('message');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
+    Route::group(['prefix' => 'house', 'as' => 'house.'], function () {
+    Route::post('/rate/{id}', [ProfileController::class, 'destroy'])->name('rate');
+    });
 });

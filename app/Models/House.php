@@ -18,13 +18,18 @@ class House extends Model implements HasMedia
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'owner_id',
         'tenant_id',
-        'lease_amount',
+        'price',
+        'description',
         'payment_date',
         'address',
+        'privateNotes',
         'map_link',
+        'area',
         'amenities',
+        'rented',
     ];
 
 
@@ -74,10 +79,7 @@ class House extends Model implements HasMedia
         return [];
     }
 
-    public function addImage(): void
-    {
-        $this->addMediaFromRequest('image')->toMediaCollection('images');
-    }
+   
 
     public function setAmenitiesAttribute($value): void
     {

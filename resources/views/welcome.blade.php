@@ -61,7 +61,7 @@
 
                 <div class="row">
                     @foreach ($houses as $house)
-                        <div class="col-md-4 my-4">
+                        <div class="col-md-4 col-lg-3 my-4">
                             <div class="card property-card h-100">
                                 <a href="{{ route('house_detail', ['id' => $house->id]) }}" class="text-decoration-none text-reset stretched-link">
 

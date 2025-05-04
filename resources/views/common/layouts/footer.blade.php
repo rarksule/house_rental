@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h4>About Us</h4>
-                    <p>Adipisci rerum vertatis cum. Enim eaque enim quo voluptatum nam. Dolores elus elus hic dolorem magnam.</p>
+                    <p>we build this house rental managment system student of JigJiga uuniversity for our thesis</p>
                 </div>
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h4>Contact</h4>
-                    <p>Colima Street West, Victoria 8007, Australia.</p>
+                    <p>JigJiga university</p>
                 </div>
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h4>More Information</h4>

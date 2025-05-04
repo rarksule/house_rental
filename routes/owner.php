@@ -53,7 +53,7 @@ Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'o
     
     
     Route::get('/addHouse', [HouseController::class, 'create'])->name('addHouse');
-    Route::post('/addHouse', [HouseController::class, 'post'])->name('storeHouse');
+    Route::post('/addHouse', [HouseController::class, 'store'])->name('storeHouse');
     Route::get('/allHouse', [HouseController::class, 'index'])->name('allHouse');
     Route::get('/rentedHouse', [HouseController::class, 'index'])->name('rentedHouse');
     Route::get('/setting', [OwnerController::class, 'index'])->name('setting');

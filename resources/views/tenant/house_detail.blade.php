@@ -8,24 +8,13 @@
                     <p class="lead text-muted">{{$house->address}}</p>
                 </div>
                 <div class="col-md-4 text-md-end">
-                    <h2 class="text-primary">{{$house->amount}}<small class="text-muted">/ Month</small></h2>
+                    <h2 class="text-primary display-6">{{$house->price}}<small class="text-muted">/ Month</small></h2>
                     <div class="mt-3">
                         <button class="btn btn-outline-secondary me-2"><i
-                                class="bi bi-share"></i>{{__('message.share')}}</button>
+                                class="bi bi-share me-1"></i>{{__('message.share')}}</button>
                         <button class="btn btn-outline-secondary"><i
-                                class="bi bi-bookmark"></i>{{__('message.save')}}</button>
+                                class="bi bi-bookmark me-1"></i>{{__('message.save')}}</button>
                     </div>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col">
-                    <span class="badge bg-light text-dark me-2"><i class="bi bi-door-open"></i>
-                        {{$house->amenities[0] ?? ''}}</span>
-                    <span class="badge bg-light text-dark me-2"><i
-                            class="bi bi-bucket"></i>{{$house->amenities[1] ?? ''}}</span>
-                    <span class="badge bg-light text-dark"><i class="bi bi-rulers"></i>
-                        {{$house->amenities[2] ?? ''}}m²</span>
                 </div>
             </div>
         </div>
@@ -40,50 +29,74 @@
                 <div class="container-fluid p-0">
                     {{-- First Row (40% height) --}}
                     <div class="row gx-1 mx-3 mb-2" style="height: 40vh;">
+                        @if (getAllMedia($house)->count() <= 2)
                         @for ($i = 0; $i < 2; $i++)
                             <div class="col-6 h-100">
                                 <img src="{{ getAllMedia($house)[$i] ?? noImage() }}" alt="Property"
                                     class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                             </div>
-                        @endfor
+                        @endfor 
+                        @endif
+                        
                     </div>
 
                     {{-- Second Row (60% height) --}}
+                    @if (getAllMedia($house)->count() >= 2)
                     <div class="row gx-1 mx-3" style="height: 30vh;">
-                        @for ($i = 2; $i < 5; $i++)
+                        @for ($i = 2; $i <= getAllMedia($house)->count(); $i++)
                             <div class="col-4 h-100">
                                 <img src="{{ getAllMedia($house)[$i] ?? noImage() }}" alt="Property"
                                     class="img-fluid rounded w-100 h-100" style="object-fit: cover;">
                             </div>
                         @endfor
                     </div>
+                    @endif
                 </div>
 
                 <!-- Description Section -->
                 <section class="my-5">
                     <h2 class="mb-4">Description</h2>
-                    <p>{{$house->description}}</p>
+                    <p>{!! $house->description !!}</p>
                 </section>
 
                 <!-- Amenities Section -->
                 <section class="mb-5">
                     <h2 class="mb-4">Amenities</h2>
                     <div class="row">
+                        
+                            
                         <div class="col-md-6">
                             <ul class="amenities-list">
-                                <li><i class="bi bi-check-circle text-success me-2"></i> Swimming pool</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i> Air Conditioning</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i> 4 Bedrooms</li>
+                            @foreach ($house->amenities as $key => $value)
+                                <li><i class="{{$value ? 'bi bi-check-circle text-success me-2' : 'bi bi-x-circle text-danger me-2'}}"></i> {{$key}}</li>
+                          @endforeach
                             </ul>
                         </div>
-                        <div class="col-md-6">
-                            <ul class="amenities-list">
-                                <li><i class="bi bi-check-circle text-success me-2"></i> 2 Bathrooms</li>
-                                <li><i class="bi bi-check-circle text-success me-2"></i> 447 m² Living Area</li>
-                            </ul>
-                        </div>
+                        
                     </div>
                 </section>
+
+                <div class="rating-container mb-4">
+                    <h4>Rate this property</h4>
+                    
+                    <!-- Star Rating -->
+                    <div class="star-rating mb-3 h2 property-rating">
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="star" data-value="{{ $i }}">
+                                <i class="far fa-star"></i>
+                            </span>
+                        @endfor
+                        <input type="hidden" name="rating" id="rating-value" value="0">
+                    </div>
+                    
+                    <!-- Comment Form -->
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Your Review</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Share your experience..."></textarea>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" id="submit-rating">Submit Review</button>
+                </div>
 
                 <!-- Reviews Section -->
                 <section class="mb-5">
@@ -123,7 +136,7 @@
                             <img src="{{getSingleImage($house->owner, 'profile_image')}}" alt="Agent photo"
                                 class="rounded-circle me-3">
                             <div>
-                                <h5 class="mb-0">Lydia Strosin</h5>
+                                <h5 class="mb-0">{{$house->owner->name}}</h5>
                                 <p><i class="bi bi-telephone me-2"></i>{{$house->owner->contact_number}}</p>
                             </div>
                         </div>
@@ -153,4 +166,68 @@
             </div>
         </div>
     </div>
+<script>
+    $(document).ready(function() {
+    // Star rating hover effect
+    $('.star').hover(
+        function() {
+            const value = $(this).data('value');
+            $('.star').each(function(index) {
+                if (index < value) {
+                    $(this).find('i').removeClass('far').addClass('fas');
+                }
+            });
+        },
+        function() {
+            const currentRating = $('#rating-value').val();
+            $('.star').each(function(index) {
+                if (index >= currentRating) {
+                    $(this).find('i').removeClass('fas').addClass('far');
+                }
+            });
+        }
+    );
+
+    // Star rating click
+    $('.star').click(function() {
+        const value = $(this).data('value');
+        $('#rating-value').val(value);
+        
+        $('.star').each(function(index) {
+            if (index < value) {
+                $(this).find('i').removeClass('far').addClass('fas');
+            } else {
+                $(this).find('i').removeClass('fas').addClass('far');
+            }
+        });
+    });
+
+    // Submit rating
+    $('#submit-rating').click(function() {
+        const rating = $('#rating-value').val();
+        const comment = $('#comment').val();
+        
+        if (rating == 0) {
+            alert('Please select a rating');
+            return;
+        }
+        
+        $.ajax({
+            url: '{{ route("tenant.house.rate", $house->id) }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                rating: rating,
+                comment: comment
+            },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr) {
+                alert('Error submitting review');
+            }
+        });
+    });
+});
+</script>
 </x-app-layout>
