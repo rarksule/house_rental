@@ -44,8 +44,8 @@ class LoginController extends Controller
         $credentials = $request->only($field, 'password');
 
         $remember = request('remember');
-        if (!Auth::attempt($credentials, $remember)) {
-            return redirect("login")->with('error', __('Email or password is incorrect'));
+        if (!Auth::attempt($credentials)) {
+            return back()->with('error', __('Email or password is incorrect'));
         }
 
         $user = User::where('email', $request->email)->first();
@@ -65,15 +65,15 @@ class LoginController extends Controller
             // }
         } elseif (isset($user) && ($user->status == USER_STATUS_INACTIVE)) {
             Auth::logout();
-            return redirect("login")->with('error', __('Your account is inactive. Please contact with admin'));
+            return back()->with('error', __('Your account is inactive. Please contact with admin'));
         } elseif (isset($user) && ($user->status == USER_STATUS_DELETED)) {
             Auth::logout();
-            return redirect("login")->with('error', __('Your account has been deleted.'));
+            return back()->with('error', __('Your account has been deleted.'));
         } elseif (isset($user) && ($user->status == USER_STATUS_ACTIVE)) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } else {
             Auth::logout();
-            return redirect("login")->with('error', __(SOMETHING_WENT_WRONG));
+            return back()->with('error', __(SOMETHING_WENT_WRONG));
         }
         // return redirect()->intended(RouteServiceProvider::HOME);
     }

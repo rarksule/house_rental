@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'a
         Route::get('/index', [ProfileController::class, 'edit'])->name('index');
     });
     Route::get('/notification', [ProfileController::class, 'edit'])->name('notification');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.index');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.create');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.contact');
     Route::delete('/information', [ProfileController::class, 'destroy'])->name('information.index');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('setting');
+    Route::get('/message',[MessageController::class,'index'])->name('message');
 });

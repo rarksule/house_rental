@@ -2,40 +2,51 @@
     <div class="welcome">
         <section class="hero-section">
             <div class="container text-center">
-                <h1 class="display-4 fw-bold mb-4">Find Your Perfect Home in JIGJIGA</h1>
-                <p class="lead mb-5">From as low as 1999 birr per month with limited time offer</p>
+                <h1 class="display-4 fw-bold mb-4">{{__('message.find_home')}}</h1>
+                <p class="lead mb-5">{{__('message.offer')}}</p>
+
 
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <div class="bg-white rounded p-4 d-flex flex-wrap justify-content-center search-options">
-                            <div class="form-check form-check-inline mx-3 my-2">
-                                <div class="filter-item">
-                                    <select class="form-select" id="neighborhood">
-                                        <option selected>Select Neighborhood</option>
-                                        <option>Downtown</option>
-                                        <option>Suburb</option>
-                                    </select>
+                        <h1 class="text-center mb-5">{{__('message.accesable')}}</h1>
+
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h3 class="card-title mb-4">{{__('message.search.location')}}</h3>
+
+                                <div class="mb-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control"
+                                            placeholder="{{__('message.search.neighbor')}}" list="neighborhoodOptions">
+                                        <button class="btn btn-primary"
+                                            type="button">{{__('message.search.0')}}</button>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{__('message.search.min_price')}}</label>
+                                        <select class="form-select">
+                                            <option selected>{{__('message.search.no_min')}}</option>
+                                            <option>500</option>
+                                            <option>1,000</option>
+                                            <option>1,500</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">{{__('message.search.max_price')}}</label>
+                                        <select class="form-select">
+                                            <option selected>{{__('message.search.no_Max')}}</option>
+                                            <option>3,000</option>
+                                            <option>4,000</option>
+                                            <option>5,000</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-check form-check-inline mx-3 my-2">
-                                <select class="form-select" id="category">
-                                    <option selected>Select Category</option>
-                                    <option>Restaurants</option>
-                                    <option>Shops</option>
-                                </select>
-                            </div>
-                            <div class="form-check form-check-inline mx-3 my-2">
-                                <select class="form-select" id="city">
-                                    <option selected>Select City</option>
-                                    <option>New York</option>
-                                    <option>Los Angeles</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary px-4 my-2">Search</button>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </section>
@@ -44,47 +55,61 @@
         <section class="py-5">
             <div class="container">
                 <div class="text-center mb-5">
-                    <h1 class="fw-bold">Explore Good Places</h1>
-                    <p class="text-muted">At vero eos et accusamus et lusto odio dignissimos ducimus qui
-                        blanditis<br>proesentum voluptatum deleniti atque corrupti quos dolores</p>
+                    <h1 class="fw-bold">{{__('message.explore')}}</h1>
+                    <p class="text-muted">{{__('message.explore_text')}}</p>
                 </div>
 
                 <div class="row">
-                    @for ($i = 0; $i < 3; $i++)
-                        <div class="col-md-4">
+                    @foreach ($houses as $house)
+                        <div class="col-md-4 my-4">
                             <div class="card property-card h-100">
-                                <a href="{{route('tenant.house_detail')}}"
-                                    class="text-decoration-none text-reset stretched-link">
+                                <a href="{{ route('house_detail', ['id' => $house->id]) }}" class="text-decoration-none text-reset stretched-link">
 
                                     <div class="property-image">
-                                        <span>600 × 600</span>
+                                        <span><img src="{{getSingleImage($house)}}" alt="image"></span>
                                     </div>
                                     <div class="card-body">
 
                                         <span class="property-type bg-danger mb-2 d-inline-block">Rent</span>
-                                        <h3>4,760 Birr / Month</h3>
-                                        <p class="text-muted">1025 West 19th Street</p>
+                                        <h3>{{$house->amount}} Birr / Month</h3>
+                                        <p class="text-muted">{{$house->address}}</p>
+                                        @php
+                                            $rating = $house->reviews->count() > 0 ? $house->reviews->avg('rating') : 0;
+                                            $filledStars = floor($rating);
+                                            $halfStar = $rating - $filledStars >= 0.4;
+                                            $emptyStars = 5 - $filledStars - ($halfStar ? 1 : 0);
+                                            $totalReviews = $house->reviews->count(); 
+                                        @endphp
+
                                         <div class="mb-3 property-rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="ms-1">(9 Reviews)</span>
+                                            @for ($i = 1; $i <= $filledStars; $i++)
+                                                <i class="fas fa-star"></i>
+                                            @endfor
+
+                                            @if ($halfStar)
+                                                <i class="fas fa-star-half-alt"></i>
+                                            @endif
+
+                                            @for ($i = 1; $i <= $emptyStars; $i++)
+                                                <i class="far fa-star"></i>
+                                            @endfor
+
+                                            <span class="ms-1">({{ $totalReviews }} Reviews)</span>
                                         </div>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item"><i class="fas fa-bed me-1"></i> 4 Beds</li>
-                                            <li class="list-inline-item"><i class="fas fa-bath me-1"></i> 2 Bath</li>
-                                            <li class="list-inline-item"><i class="fas fa-arrows"></i> 447 m²</li>
+                                         <ul class="list-inline">
+                                            <li class="list-inline-item"><i class="fas fa-faucet "></i> {{$house->amenities['tap_water'] ?? ""}}</li>
+                                            <li class="list-inline-item"><i class="fas fa-home me-1"></i> {{$house->amenities['rooms'] ?? ""}}</li>
+                                            <li class="list-inline-item"><i class="fas fa-chart-area"></i> {{$house->amenities['area'] ?? ""}}</li>
+                                            <li class="list-inline-item"><i class="fas fa-dog"></i> {{$house->amenities['dog'] ?? ""}}</li>
                                         </ul>
                                     </div>
 
                                 </a>
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </section>
-
+    </div>
 </x-app-layout>

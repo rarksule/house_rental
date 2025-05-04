@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\owner\OwnerController;
+use App\Http\Controllers\owner\HouseController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +21,8 @@ use App\Http\Controllers\owner\OwnerController;
 
 Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'owner']], function () {
     
-    Route::group(['prefix' => 'property', 'as' => 'property.'], function () {
-        Route::get('/add', [ProfileController::class, 'edit'])->name('add');
-        Route::get('/allUnit', [ProfileController::class, 'edit'])->name('allUnit');
-        Route::get('/allProperty', [ProfileController::class, 'edit'])->name('allProperty');
-        Route::get('/ownProperty', [ProfileController::class, 'edit'])->name('ownProperty');
-        Route::get('/leaseProperty', [ProfileController::class, 'edit'])->name('leaseProperty');
-        Route::get('/allProperty', [ProfileController::class, 'edit'])->name('allProperty');
-    });
+    
+    
     Route::group(['prefix' => 'listing', 'as' => 'listing.'], function () {
         Route::get('/add', [ProfileController::class, 'edit'])->name('create');
         Route::get('/allUnit', [ProfileController::class, 'edit'])->name('index');
@@ -40,7 +36,6 @@ Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'o
         Route::get('/allearn', [ProfileController::class, 'edit'])->name('earning');
         Route::get('/alltent', [ProfileController::class, 'edit'])->name('tenant');
     });
-
     
     Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
         Route::get('/add', [ProfileController::class, 'edit'])->name('loss-profit.by.month');
@@ -57,10 +52,15 @@ Route::group(['prefix' => 'owner', 'as' => 'owner.', 'middleware' => ['auth', 'o
     });
     
     
+    Route::get('/addHouse', [HouseController::class, 'create'])->name('addHouse');
+    Route::post('/addHouse', [HouseController::class, 'post'])->name('storeHouse');
+    Route::get('/allHouse', [HouseController::class, 'index'])->name('allHouse');
+    Route::get('/rentedHouse', [HouseController::class, 'index'])->name('rentedHouse');
     Route::get('/setting', [OwnerController::class, 'index'])->name('setting');
     Route::get('/dashboard', [OwnerController::class, 'index'])->name('dashboard');
     Route::get('/notification', [ProfileController::class, 'edit'])->name('notification');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name(name: 'profile');
     Route::get('/information', [ProfileController::class, 'destroy'])->name('information.index');
     Route::get('/search', [ProfileController::class, 'destroy'])->name('top.search');
+    Route::get('/message',[MessageController::class,'index'])->name('message');
 });

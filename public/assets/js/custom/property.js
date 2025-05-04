@@ -7,42 +7,6 @@ var state_id;
 var city_id;
 getPropertyInformation(property_id)
 
-// Response handler
-function stepChange(response) {
-    var output = '';
-    var type = 'error';
-    $('.error-message').remove();
-    $('.is-invalid').removeClass('is-invalid');
-    if (response['status'] == true) {
-        output = output + response['message'];
-        type = 'success';
-        toastr.success(response.data.message)
-        $('#addHtmlForm').html(response.data.view)
-        stepActiveClass(response.data.step)
-        if (response.data.step == 4) {
-            propertyUnitIds = response.data.propertyUnitIds
-        }
-        if (response.data.property.property_detail) {
-            country_id = response.data.property.property_detail.country_id;
-            state_id = response.data.property.property_detail.state_id;
-            city_id = response.data.property.property_detail.city_id;
-            if (country_id) {
-                getStateByCountryId(country_id)
-            }
-            if (state_id) {
-                getCitiesByState(state_id)
-            }
-        }
-        datePicker()
-        if (response.data.step == 5) {
-            thumbmnilImage()
-            dropzone()
-        }
-        // alertAjaxMessage(type, output);
-    } else {
-        commonHandler(response)
-    }
-}
 
 // Go to Step
 function stepActiveClass(step) {
@@ -104,31 +68,6 @@ function thumbmnilImage() {
         });
 }
 
-function dropzone() {
-    var dropzonePreviewNode = document.querySelector("#dropzone-preview-list");
-    dropzonePreviewNode.id = "";
-    var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
-    dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
-    var route = $('#imageStoreRoute').val() + '/' + $('.property_id').val();
-    var dropzone = new Dropzone(".dropzone", {
-        method: "post",
-        url: route,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        previewTemplate: previewTemplate,
-        previewsContainer: "#dropzone-preview",
-        success: function (response) {
-            toastr.success("Uploaded Successfully")
-            getPropertyImageDoc(property_id);
-        },
-        error: function (error) {
-            if (error.status) {
-                toastr.error(error.responseJSON.message)
-            }
-        }
-    });
-}
 
 // Get location
 $(document).on("change", ".country_id", function () {
@@ -238,7 +177,7 @@ function getUnitRes(response) {
 }
 function resImgDoc(response) {
     $('#addHtmlForm').html(response.data.view)
-    dropzone();
+    
 }
 
 function getRentCharge(property_id) {
@@ -253,7 +192,6 @@ function getPropertyImageDoc(property_id) {
 function getRentChargeRes(response) {
     $('#addHtmlForm').html(response.data.view)
     datePicker()
-    dropzone()
 }
 
 $(document).on("change", "#sameUnitRent", function () {
@@ -345,16 +283,7 @@ $(document).on("click", ".removeImage", function () {
     })
 });
 
-function documentRemovedRes(response) {
-    toastr.success(response.message)
-    $(thisStateSelector).parent(".dropzone-remove-icon").closest(".dropzone-img-wrap").closest("#dropzone-preview-list").remove();
-    Swal.fire({
-        title: 'Deleted',
-        html: ' <span style="color:red">Item has been deleted</span> ',
-        timer: 2000,
-        icon: 'success'
-    })
-}
+
 
 $(document).on("click", ".add-field", function () {
     $('.multi-fields').append(

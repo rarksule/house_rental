@@ -12,8 +12,8 @@
                                             data-icon="openmoji:waving-hand"></span></p>
                                 </div>
                                 <div class="page-title-right">
-                                    <a href="{{ route('owner.property.add') }}" class="theme-btn"
-                                        title="{{ __('Add Property') }}">{{ __('Add Property') }}</a>
+                                    <a href="{{ route('owner.addHouse') }}" class="theme-btn"
+                                        title="{{ __('Add House') }}">{{ __('Add House') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +136,7 @@
 
                                                 <div>
                                                     <a class="theme-link font-14 font-medium d-flex align-items-center justify-content-center mt-20"
-                                                        href="{{ route('owner.property.allProperty') }}">
+                                                        href="{{ route('owner.allHouse') }}">
                                                         {{ __('View All') }}<i class="ri-arrow-right-line ms-2"></i>
                                                     </a>
                                                 </div>

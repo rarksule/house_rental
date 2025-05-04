@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\tenant\TenantController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/local/{ln}', function ($ln) {
     // $language = Language::where('code', $ln)->first();
@@ -18,25 +19,16 @@ Route::get('/local/{ln}', function ($ln) {
     return redirect()->back();
 })->name('local');
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        switch (Auth::user()->role) {
-            case USER_ROLE_ADMIN:
-                return redirect(route('admin.dashboard'));
-            case USER_ROLE_OWNER:
-                return redirect(route('owner.dashboard'));
-            case USER_ROLE_TENANT:
-                return redirect(route('tenant.dashboard'));
-        }
 
-    } else {
-        return view('welcome');
-    }
-})->name('home');
+Route::get('/dashboard', function () {
 
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    return isAdmin() ? redirect(route('admin.dashboard'))
+        :( isOwner() ? redirect(route('owner.dashboard')) : redirect(route('home')));
 
-Route::patch('/change', [ProfileController::class, 'update'])->name('change-password');
+})->name('dashboard');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/house_detail/{id}', [HomeController::class, 'show'])->name('house_detail');
 
 require __DIR__ . '/auth.php';

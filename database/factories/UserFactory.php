@@ -2,43 +2,62 @@
 
 namespace Database\Factories;
 
+use App\Constants\UserRoles;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(), // 70% chance of having last name
+            'email' => $this->faker->unique()->safeEmail(),
+            'phone_verified_at' => $this->faker->optional(60)->dateTimeThisYear(), // 60% chance of being verified
+            'password' => bcrypt('password'), // default password for all seeded users
+            'contact_number' => $this->faker->unique()->phoneNumber(), // 80% chance of having contact number
+            'status' => $this->faker->boolean(80), // 80% chance of being active
+            'created_by' => null, // Will be set in seeder if needed
+            'role' => $this->faker->randomElement([1,2,3]),
+            'created_at' => $this->faker->dateTimeBetween('-2 years', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Indicate that the user is active.
      */
-    public function unverified(): static
+    public function active()
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => true,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the user is inactive.
+     */
+    public function inactive()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'status' => false,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the user's phone is verified.
+     */
+    public function verified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'phone_verified_at' => now(),
+            ];
+        });
     }
 }

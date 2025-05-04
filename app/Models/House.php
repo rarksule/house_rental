@@ -24,17 +24,23 @@ class House extends Model implements HasMedia
         'payment_date',
         'address',
         'map_link',
+        'amenities',
     ];
 
 
     public function owner()
     {
-        return $this->hasOne(User::class, 'owner_id');
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function tenant()
     {
-        return $this->hasOne(User::class, 'tenant_id');
+        return $this->belongsTo(User::class, 'tenant_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'house_id');
     }
 
 
@@ -55,16 +61,33 @@ class House extends Model implements HasMedia
         'payment_date' => 'datetime',
     ];
 
-    public function getImageAttribute(): string
+    public function getImage()
     {
         if ($this->getMedia() != null) {
-            return $this->getFirstMediaUrl();
+            $media = $this->getMedia('images');
+            $imageUrls = [];
+            foreach ($media as $image) {
+                array_push($imageUrls, $image->getUrl());
+            }
+            return $imageUrls;
         }
-        return asset('assets/images/no-image.jpg');
+        return [];
     }
 
-    public function addImageAttribute(): void
+    public function addImage(): void
     {
         $this->addMediaFromRequest('image')->toMediaCollection('images');
     }
+
+    public function setAmenitiesAttribute($value): void
+    {
+        $this->attributes['amenities'] = json_encode($value);
+    }
+
+    public function getAmenitiesAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
+
+
 }

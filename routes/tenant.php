@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Auth\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\tenant\TenantController;
 
 /*
@@ -26,6 +27,7 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
         Route::get('/leaseProperty', [ProfileController::class, 'edit'])->name('leaseProperty');
         Route::get('/allProperty', [ProfileController::class, 'edit'])->name('allProperty');
     });
+    Route::post('/request',[MessageController::class,'store'])->name('request');
     Route::group(['prefix' => 'tenant', 'as' => 'tenant.'], function () {
 
         Route::get('/index', [ProfileController::class, 'edit'])->name('index');
@@ -35,12 +37,12 @@ Route::group(['prefix' => 'tenant', 'as' => 'tenant.', 'middleware' => ['auth', 
     })->name('dashboard');
 
     Route::get('/notification', [ProfileController::class, 'edit'])->name('notification');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.index');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.create');
     Route::delete('/listing', [ProfileController::class, 'destroy'])->name('listing.contact');
     Route::delete('/information', [ProfileController::class, 'destroy'])->name('information.index');
     
-    Route::get('/house_detail', [TenantController::class, 'index'])->name('house_detail');
+    Route::get('/message',[MessageController::class,'index'])->name('message');
     Route::delete('/search', [ProfileController::class, 'destroy'])->name('top.search');
 });

@@ -1,3 +1,4 @@
+ @if (isAdminPanel())
 <div class="vertical-menu">
     <div data-simplebar class="h-100">
         <!--- Sidemenu -->
@@ -6,7 +7,7 @@
             <ul class="metismenu list-unstyled" id="side-menu">
 
                 <li>
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('dashboard') }}">
                         <i class="ri-dashboard-line"></i>
                         <span>{{ __('Dashboard') }}</span>
                     </a>
@@ -19,20 +20,16 @@
                         </a>
                         <ul class="sub-menu {{ @$navPropertyMMShowClass }}" aria-expanded="false">
                             <li class="{{ @$subNavAllPropertyMMActiveClass }}">
-                                <a href="{{ route('owner.property.allProperty') }}"
-                                    class="{{ @$subNavAllPropertyActiveClass }}">{{ __('All Property') }}</a>
+                                <a href="{{ route('owner.allHouse') }}"
+                                    class="{{ @$subNavAllPropertyActiveClass }}">{{ __('All Houses') }}</a>
                             </li>
                             <li class="{{ @$subNavAllUnitMMActiveClass }}">
-                                <a href="{{ route('owner.property.allUnit') }}"
-                                    class="{{ @$subNavAllUnitActiveClass }}">{{ __('All Unit') }}</a>
+                                <a href="{{ route('owner.addHouse') }}"
+                                    class="{{ @$subNavAllUnitActiveClass }}">{{ __('Add House') }}</a>
                             </li>
                             <li class="{{ @$subNavOwnPropertyActiveClass }}">
-                                <a href="{{ route('owner.property.ownProperty') }}"
-                                    class="{{ @$subNavOwnPropertyActiveClass }}">{{ __('Own Property') }}</a>
-                            </li>
-                            <li class="{{ @$subNavLeasePropertyActiveClass }}">
-                                <a href="{{ route('owner.property.leaseProperty') }}"
-                                    class="{{ @$subNavLeasePropertyActiveClass }}">{{ __('Lease Property') }}</a>
+                                <a href="{{ route('owner.rentedHouse') }}"
+                                    class="{{ @$subNavOwnPropertyActiveClass }}">{{ __('Rented Houses') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -80,15 +77,15 @@
                     </a>
                     <ul class="sub-menu {{ @$navProfileMMShowClass }}" aria-expanded="false">
                         <li class="{{ @$subNavProfileMMActiveClass }}"><a class="{{ @$subNavProfileActiveClass }}"
-                                href="{{ route('profile') }}">{{ __('My Profile') }}</a></li>
+                                href="{{ route(userPrefix().'.profile') }}">{{ __('My Profile') }}</a></li>
                         <li><a href="{{ route('change-password') }}">{{ __('Change Password') }}</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href=" route('admin.dashboard')">
+                    <a href=" {{route(userPrefix().'.message')}}">
                         <i class="ri-message-fill"></i>
-                        <span>{{ __('Message') }}</span>
+                        <span>{{ __('message.message') }}</span>
                     </a>
                 </li>
                 @if (isAdmin())
@@ -121,3 +118,4 @@
         </div>
     </div>
 </div>
+@endif

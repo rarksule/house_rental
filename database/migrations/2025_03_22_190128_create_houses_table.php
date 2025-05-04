@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('tenant_id')->nullable();
-            // $table->unsignedBigInteger('owner_id');
-            $table->foreignId('tenant_id')->references('id')->on('users')->nullable() ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('name');
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->foreign('tenant_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('owner_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->decimal('lease_amount')->default(0)->nullable();
+            $table->decimal('amount')->default(0)->nullable();
             $table->date('payment_date')->nullable();
             $table->text('address')->nullable();
             $table->mediumText('map_link')->nullable();
+            $table->longText('description');
+            $table->double('review')->default('0');
+            $table->json('amenities')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

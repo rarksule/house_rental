@@ -382,6 +382,14 @@ function checkUser($userRole)
     return $user ? $userRole == $user->role : 0;
 }
 
+
+if (!function_exists('timeAgo')) {
+    function timeAgo($dateTime)
+    {
+        return Carbon::parse($dateTime)->diffForHumans();
+    }
+}
+
 // if (!function_exists('languages')) {
 //     function languages()
 //     {
@@ -532,10 +540,11 @@ function getNotificationLimit($user_id)
     return $fetchNotification;
 }
 
-function selectedLanguage() {
-    $langugae = new User(['name'=>'English']);
+function selectedLanguage()
+{
+    $langugae = new User(['name' => 'English']);
     $langugae->name = 'English';
-    
+
     $langugae->code = 'en';
     $langugae->status = 1;
     $langugae->icon = 'assets/images/language-flag/EN.png';
@@ -544,8 +553,51 @@ function selectedLanguage() {
 
 }
 
-function languages(){
-    return [selectedLanguage(),selectedLanguage()];
+function userPrefix()
+{
+    if (isAdmin()) {
+        return 'admin';
+    } else {
+        return isOwner() ? 'owner' : 'tenant';
+    }
+}
+
+function languages()
+{
+    return [selectedLanguage(), selectedLanguage()];
+}
+
+function isAdminPanel()
+{
+    if (isAdmin() || isOwner()) {
+        return Route::currentRouteName() != 'home';
+    } else {
+        return false;
+    }
+}
+
+function noImage(){
+    return asset('assets/images/no-image.jpg');
+}
+
+function getAllMedia($model,$collection='images',$needAuth=false){
+    
+    if (!auth()->check() && $needAuth) {
+        return noImage();
+    }
+    if ($model->getMedia() != null) {
+        $media = $model->getMedia($collection);
+        $imageUrls = [];
+        foreach ($media as $image) {
+            array_push($imageUrls, $image->getUrl());
+        }
+        return $imageUrls;
+    }
+    return [];
+}
+
+function getSingleImage($model,$collection='images',$needAuth=false){
+    return getAllMedia($model,$collection,$needAuth=false)[0] ?? asset('assets/images/no-image.jpg');
 }
 
 // if (!function_exists('taxSetting')) {

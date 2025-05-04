@@ -110,6 +110,7 @@ ul {
     padding: 0;
 }
 
+
 a,
 a>* {
     outline: none;
@@ -311,7 +312,6 @@ label {
 h1,
 h2,
 h3,
-h4,
 h5,
 h6 {
     font-weight: 500;
@@ -1280,7 +1280,7 @@ div.dt-button-info h2 {
 }
 
 .btn {
-    padding: 0;
+    padding: 3px 10px;
 }
 
 .btn.focus,

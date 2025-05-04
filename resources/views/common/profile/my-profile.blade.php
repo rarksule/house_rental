@@ -1,6 +1,4 @@
-@extends(getLayout() . '.layouts.app')
-
-@section('content')
+<x-app-layout>
     <!-- Right Content Start -->
     <div class="main-content">
         <div class="page-content">
@@ -17,7 +15,7 @@
                                 </div>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb mb-0">
-                                        <li class="breadcrumb-item"><a href="{{ route(getLayout() . '.dashboard') }}"
+                                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"
                                                 title="{{ __('Dashboard') }}">{{ __('Dashboard') }}</a></li>
                                         <li class="breadcrumb-item">{{ __('Profile') }}</li>
                                         <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
@@ -45,19 +43,16 @@
                                                     </div>
                                                     <div class="settings-inner-box-fields p-20 pb-0">
                                                         <div class="row">
-                                                            <div class="col-12 d-flex justify-content-between">
+                                                            <div class="col-md-6 mb-25">
                                                                 <!-- Upload Profile Photo Box Start -->
                                                                 <div
                                                                     class="upload-profile-photo-box upload-profile-photo-with-delete-btn mb-25">
                                                                     <div
                                                                         class="profile-user position-relative d-inline-block">
-                                                                        @if(auth()->user()->role == USER_ROLE_OWNER)
-                                                                        <img src="@if (auth()->user()->image) {{ auth()->user()->image }} @else {{ asset('assets/images/users/empty-user.jpg') }} @endif"
+
+                                                                        <img src="{{ (auth()->user()->image) ? auth()->user()->image : asset('assets/images/users/empty-user.jpg') }}"
                                                                             class="rounded-circle avatar-xl default-user-profile-image">
-                                                                        @elseif(auth()->user()->role == USER_ROLE_TENANT)
-                                                                            <img src="@if ($tenant->image) {{ $tenant->image }} @else {{ asset('assets/images/users/empty-user.jpg') }} @endif"
-                                                                                 class="rounded-circle avatar-xl default-user-profile-image">
-                                                                        @endif
+
                                                                         <div
                                                                             class="avatar-xs p-0 rounded-circle default-profile-photo-edit">
                                                                             <input id="default-profile-img-file-input"
@@ -65,7 +60,8 @@
                                                                                 class="default-profile-img-file-input">
                                                                             <label for="default-profile-img-file-input"
                                                                                 class="default-profile-photo-edit avatar-xs">
-                                                                                <span class="avatar-title rounded-circle"
+                                                                                <span
+                                                                                    class="avatar-title rounded-circle"
                                                                                     title="Change Image">
                                                                                     <i class="ri-camera-fill"></i>
                                                                                 </span>
@@ -73,20 +69,28 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <!-- Upload Profile Photo Box End -->
-                                                                @if (auth()->user()->role == USER_ROLE_TENANT || auth()->user()->role == USER_ROLE_MAINTAINER)
-                                                                    <div>
-                                                                        <button type="button" class="theme-btn-red"
-                                                                            id="deleteMyAccountBtn"
-                                                                            title="{{ __('Delete my account') }}">{{ __('Delete my Account') }}</button>
-                                                                    </div>
-                                                                @endif
                                                             </div>
 
+                                                            @if (isTenant() || isOwner())
+                                                                @if (isTenant())
+                                                                    <div class="col-md-3">
+                                                                        <button type="button" class="theme-btn "
+                                                                            title="{{ __('change-password') }}">{{ __('Change Password') }}</button>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="col-md-3"></div>
+                                                                @endif
+                                                                <div class="col-md-3">
+                                                                    <button type="button" class="theme-btn-red"
+                                                                        id="deleteMyAccountBtn"
+                                                                        title="{{ __('Delete my account') }}">{{ __('Delete my Account') }}</button>
+                                                                </div>
+                                                            @endif
                                                             <div class="col-md-4 mb-25">
                                                                 <label
                                                                     class="label-text-title color-heading font-medium mb-2">{{ __('First Name') }}</label>
-                                                                <input type="text" class="form-control" name="first_name"
+                                                                <input type="text" class="form-control"
+                                                                    name="first_name"
                                                                     placeholder="{{ __('First Name') }}"
                                                                     value="{{ auth()->user()->first_name }}">
                                                                 @error('first_name')
@@ -108,8 +112,7 @@
                                                                     class="label-text-title color-heading font-medium mb-2">{{ __('Email') }}</label>
                                                                 <input type="email" class="form-control" name="email"
                                                                     placeholder="{{ __('Email') }}"
-                                                                    value="{{ auth()->user()->email }}"
-                                                                    {{ auth()->user()->role == USER_ROLE_ADMIN || auth()->user()->role == USER_ROLE_OWNER ? '' : 'readonly' }}>
+                                                                    value="{{ auth()->user()->email }}" {{isAdmin() ? '' : 'readonly'}}>
                                                                 @error('email')
                                                                     <span class="text-danger">{{ $message }}</span>
                                                                 @enderror
@@ -139,7 +142,8 @@
                                                             <div class="col-md-4 mb-25">
                                                                 <label
                                                                     class="label-text-title color-heading font-medium mb-2">{{ __('NID Number') }}</label>
-                                                                <input type="text" class="form-control" name="nid_number"
+                                                                <input type="text" class="form-control"
+                                                                    name="nid_number"
                                                                     placeholder="{{ __('NID Number') }}"
                                                                     value="{{ auth()->user()->nid_number }}">
                                                                 @error('nid_number')
@@ -149,7 +153,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if (auth()->user()->role == USER_ROLE_OWNER)
+                                                @if (isOwner())
                                                     <div class="settings-inner-box bg-white theme-border radius-4 mb-25">
                                                         <div class="settings-inner-box-fields pb-0">
                                                             <div class="settings-inner-box-title border-bottom p-20">
@@ -162,8 +166,7 @@
                                                                     <label
                                                                         class="label-text-title color-heading font-medium mb-2">{{ __('Print Name') }}</label>
                                                                     <input type="text" class="form-control"
-                                                                        value="{{ $owner->print_name }}"
-                                                                        name="print_name"
+                                                                        value="{{ $owner->print_name }}" name="print_name"
                                                                         placeholder="{{ __('Name') }}">
                                                                     @error('print_name')
                                                                         <span class="text-danger">{{ $message }}</span>
@@ -198,7 +201,7 @@
                                                                         <div
                                                                             class="profile-user position-relative d-inline-block">
                                                                             @if ($owner->file_name)
-                                                                                <img src="{{ assetUrl($owner->folder_name . '/' . $owner->file_name) }}"
+                                                                                <img src="{{ asset($owner->folder_name . '/' . $owner->file_name) }}"
                                                                                     class="rounded-circle avatar-xl user-profile-image">
                                                                             @else
                                                                                 <img src="{{ asset('assets/images/users/empty-user.jpg') }}"
@@ -225,7 +228,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                                @if (auth()->user()->role == USER_ROLE_TENANT)
+                                                @if (isTenant())
                                                     <div class="settings-inner-box bg-white theme-border radius-4 mb-25">
                                                         <div class="settings-inner-box-fields pb-0">
                                                             <div class="settings-inner-box-title border-bottom p-20">
@@ -372,8 +375,7 @@
                                                                 <div class="col-md-4 mb-25">
                                                                     <label
                                                                         class="label-text-title color-heading font-medium mb-2">{{ __('Employment') }}</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="job"
+                                                                    <input type="text" class="form-control" name="job"
                                                                         placeholder="{{ __('Employment') }}"
                                                                         value="{{ $tenant->job }}">
                                                                     @error('job')
@@ -394,8 +396,8 @@
                                                                 <div class="col-md-4 mb-25">
                                                                     <label
                                                                         class="label-text-title color-heading font-medium mb-2">{{ __('Age') }}</label>
-                                                                    <input type="text" class="form-control"
-                                                                        name="age" placeholder="{{ __('Age') }}"
+                                                                    <input type="text" class="form-control" name="age"
+                                                                        placeholder="{{ __('Age') }}"
                                                                         value="{{ $tenant->age }}">
                                                                     @error('age')
                                                                         <span class="text-danger">{{ $message }}</span>
@@ -442,7 +444,8 @@
                                 <div class="col-md-12 mb-25">
                                     <p>Please type your email of this account <span
                                             class="fw-bold">({{ auth()->user()->email }})</span> to confirm its
-                                        deletion from this application. After successfully deletion you can't recover this
+                                        deletion from this application. After successfully deletion you can't recover
+                                        this
                                         account</p>
                                     <label class="label-text-title color-heading font-medium mb-2">{{ __('Email') }}
                                         <strong class="text-danger">*</strong></label>
@@ -469,10 +472,9 @@
             </div>
         </div>
     </div>
-@endsection
-
-@push('script')
-    <script src="{{ asset('/') }}assets/js/pages/profile-setting.init.js"></script>
-    <script src="{{ asset('/') }}assets/js/pages/default-profile-setting.init.js"></script>
-    <script src="{{ asset('assets/js/custom/delete-my-account.js') }}"></script>
-@endpush
+    @push('script')
+        <script src="{{ asset('/') }}assets/js/pages/profile-setting.init.js"></script>
+        <script src="{{ asset('/') }}assets/js/pages/default-profile-setting.init.js"></script>
+        <script src="{{ asset('assets/js/custom/delete-my-account.js') }}"></script>
+    @endpush
+</x-app-layout>

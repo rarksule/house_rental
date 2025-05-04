@@ -5,11 +5,11 @@
             <div class="d-flex w-100 align-items-center">
                 <!-- Left Side: Brand and Admin Button -->
                 <div class="d-flex align-items-center">
-                    <a class="navbar-brand d-none d-sm-block" href="#">
+                    <a class="navbar-brand d-none d-sm-block" href="{{route('home')}}">
                         <h2 class="m-0 text-primary font-24">JIGJIGA House Rental</h2>
                     </a>
 
-                    @if (isAdmin() || isOwner())
+                    @if (isAdminPanel())
                         <button type="button" class="btn-sm px-3 font-24 header-item ms-2" id="vertical-menu-btn">
                             <i class="ri-indent-decrease"></i>
                         </button>
@@ -102,12 +102,12 @@
                             <button type="button" class="header-item" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle avatar-xs fit-image header-profile-user"
-                                    src="{{ auth()->user()->image }}" alt="Header Avatar">
+                                    src="{{ getSingleImage(auth()->user(),'profile_image') }}" alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1 font-medium">{{ auth()->user()->name }}</span>
                                 <i class="mdi mdi-chevron-down d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="page-header-user-dropdown">
-                                <a class="dropdown-item" href="{{ route('owner.profile') }}"><i
+                                <a class="dropdown-item" href="{{ route(userPrefix().'.profile') }}"><i
                                         class="ri-user-line align-middle me-1"></i> {{ __('Profile') }}</a>
 
                                 @if (isAdmin())
@@ -131,7 +131,7 @@
                 </div>
 
                 <!-- Mobile Toggler -->
-                @if (isTenant() || !Auth::check())
+                @if (!isAdminPanel())
                     <button class="navbar-toggler d-lg-none ms-2" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarContent">
                         <span class="navbar-toggler-icon"></span>
@@ -139,14 +139,20 @@
                 @endif
             </div>
             <!-- Navigation Links (Will collapse on mobile) -->
-            @if (isTenant() || !Auth::check())
+            @if (!isAdminPanel())
                 <div class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
                         <div class="collapse navbar-collapse" id="navbarContent">
                             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" href="#">Home</a>
-                                </li>
+                                @if (isAdmin() || isOwner())
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{route('dashboard')}}">Dashboard</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{{route('home')}}">Home</a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Listings</a>
                                 </li>
@@ -156,12 +162,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Features</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item me-2">
                                     <a class="nav-link" href="#">Pages</a>
                                 </li>
                                 @if (!Auth::check())
                                     <li class="nav-item">
-                                        <a href="{{route('login')}}" class=" btn btn-danger  text-nowrap">Sign In</a>
+                                        <a href="{{route('login')}}" ><button class="btn btn-success text-nowrap">Sign In</button></a>
                                     </li>
                                 @endif
 

@@ -76,4 +76,6 @@ class OwnerController extends Controller
 
         return Redirect::to('/');
     }
+
+    
 }

@@ -5,7 +5,7 @@
             <div class="container-fluid p-0">
                 <div class="row sign-up-page-wrap-row">
                     <div class="col-md-6">
-                        <div class="sign-up-right-content bg-white">
+                        <div class="sign-up-right-content bg-white mx-4">
                             <form action="register" method="post">
                                 @csrf
                                 <h1 class="mb-25">{{ __('Sign Up') }}</h1>

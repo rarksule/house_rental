@@ -4,7 +4,7 @@
             <div class="container-fluid p-0">
                 <div class="row sign-up-page-wrap-row">
                     <div class="col-md-6">
-                        <div class="sign-up-right-content bg-white">
+                        <div class="sign-up-right-content bg-white mx-4">
                             <form action="{{ route('login') }}" method="post">
                                 @csrf
                                 <h1 class="mb-25">{{ __('Sign in') }}</h1>
@@ -15,8 +15,11 @@
                                     <div class="col-md-12">
                                         <label
                                             class="label-text-title color-heading font-medium mb-2">{{ __('Email') }}</label>
-                                        <input type="text" name="email" class="form-control email"
+                                        <input type="text" name="email" class="form-control email" value="{{ old('email') }}"
                                             placeholder="{{ __('Email') }}">
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="row mb-25">
@@ -24,9 +27,13 @@
                                         <label
                                             class="label-text-title color-heading font-medium mb-2">{{ __('Password') }}</label>
                                         <div class="form-group mb-0 position-relative">
-                                            <input class="form-control password" name="password"
+                                            <input class="form-control password" name="password" value="{{ old('Password') }}"
                                                 placeholder="{{ __('Password') }}" type="password">
                                             <span class="toggle cursor fas fa-eye pass-icon"></span>
+                                            
+                                        @error('password')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                         </div>
                                     </div>
                                 </div>

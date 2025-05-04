@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use App\Models\User;
+use App\Models\House;
 
 class TenantController extends Controller
 {
@@ -18,9 +18,7 @@ class TenantController extends Controller
      * Display the user's profile form.
      */
     public function index(): View
-    {
-        $auth = Auth::user();
-        return view('tenant.house_detail');
+    {   
     }
     /**
      * Display the user's profile form.
